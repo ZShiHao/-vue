@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app" v-bind:style="{color:color}">
+  {{ok?message:'no'}}
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 最基本的数据绑定:1.就是文本插入,通过mustache语法,mustache语法会将其中的数据解析为纯文本数据,不能解析html标签
+  // mustache标记会被data里面相应的数据替代,同时被更新当data里面的数据发生改变
+  // v-once命令可以让文本只插入一次,往后不再继续更新
+  // 2.v-html可以插入html标签
+  // 3.标签属性,v-bind可以让标签的属性和数据相互绑定,从而向标签属性中插入内容
+  // 4.JS表达式,在所有数据绑定中,可以使用JS表达式(一个)
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    ok:true,
+    message:'<h1>hello,vue</h1>',
+    color:'red'
+   }
+  })
+ </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  {{a}}
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // 数据和方法:
+  // 当创建一个vue实例时,会将data对象中的所有的属性添加到vue的响应式系统中
+  // 当这些属性的值发生变化时,视图会产生响应,会更新匹配最新的值
+  // note:只有当vue实例创建时就存在的属性才是响应式的,如果后面需要某个属性,那么一开始就要添加并初始化
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    a:1,
+   },
+   created:function(){
+    console.log(this.a);
+   }
+  })
+  // vue实例有一些实例属性和方法,前缀$用来区分用户定义的属性
+  vm.$el===document.querySelector('#app'); // true
+  vm.$watch('a',function(){
+   console.log('a has a change');
+  })
+ </script>
+</body>
+</html>

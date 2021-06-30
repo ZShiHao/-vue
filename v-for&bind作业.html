@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <style>
+  [v-cloak] {
+   display: none;
+  }
+  .active {
+   color: red;
+  }
+ </style>
+</head>
+<body>
+ <div id="app" v-cloak>
+  <ul>
+   <!-- 将class与thisIndex的值绑定 -->
+   <li v-for="(m,index) in movies" :class="currentIndex===index?'active':''" @click="changeColor(index)">{{m}}</li>
+  </ul>
+ </div>
+ <script src="./vue.js"></script>
+ <script>
+  const app=new Vue({
+   el:'#app',
+   data:{
+    movies:['你的名字','让子弹飞','命运石之门'],
+    currentIndex:-1 // 表示当前鼠标点击的li对应的index值
+   },
+   methods:{
+    changeColor:function(index){
+     // 每点击之后,都改变currentIndex的值,每当currentIndex值变之后,所有的li都会刷洗数据,也就是会判断跟index的对比
+     // 如果相等,就添加active属性,如果不等,就空值
+     this.currentIndex=index;
+    }
+   }
+  })
+ </script>
+</body>
+</html>

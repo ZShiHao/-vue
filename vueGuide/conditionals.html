@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <span v-if="seen">Now you see me</span>
+  <ul>
+   <li v-for="m in movies">{{m}}</li>
+  </ul>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // 绑定数据不仅仅是文本和元素属性,v-if还可以绑定DOM的结构
+  const app=new Vue({
+   el:'#app',
+   data:{
+    seen:true,
+    movies:['zhang','shi','hao']
+   }
+  })
+ </script>
+</body>
+</html>

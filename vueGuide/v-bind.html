@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <span v-bind:title='message'>move mouse here and see what happened</span>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // v-前缀的都是命令,可以用来指示响应式的行为去渲染DOM
+  // v-bind用来捆绑元素属性,这个指令的意思是保持title属性和vue实例中的message保持一致
+  const app=new Vue({
+   el:'#app',
+   data:{
+    message:'hello'
+   }
+  })
+ </script>
+</body>
+</html>

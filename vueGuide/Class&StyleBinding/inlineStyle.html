@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id='app'>
+  <div v-bind:style="styleObject">hello,Vue</div>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 绑定行内样式
+  // 对象语法
+  // 直接用styleObject更好,比较直观
+  const vm=new Vue({
+   el:"#app",
+   data:{
+    styleObject:{
+     color:'red',
+     fontSize:'13px'
+    }
+   }
+  })
+ </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <style>
+  [cloak] {
+   display: none;
+  }
+ </style>
+</head>
+<body>
+ <div id="app" v-cloak>
+  <h2 v-if='awesome'>Vue is awesome!</h2>
+  <h2 v-else-if='ok'>no</h2>
+  <h3 v-else>nonono</h3>
+  <!-- template标签一般用于暂时向用户隐藏的内容 -->
+  <!-- template标签不会渲染到页面上 -->
+  <template v-if="loginType">
+   <label for="1">Username</label>
+   <input type="text" id="1" key='1'  placeholder="Enter your username">
+  </template>
+  <template v-else>
+   <label for="2">Email</label>
+   <input type="text" id='2' key='2'  placeholder="Enter your email address">
+  </template>
+  <button v-on:click="toggle">Toggle loin type</button>
+  <div v-show='false'>zhang</div>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // v-else指令用来指定v-if不成立时的另一种情况
+  // v-else指令必须紧挨着v-if指令,否则不成立
+  const vm= new Vue({
+   el:'#app',
+   data:{
+    awesome:false,
+    ok:true,
+    loginType:true
+   },
+   methods:{
+    toggle:function(){
+     this.loginType=!this.loginType
+    }
+   }
+  })
+  // vue为了高效渲染元素,通常会复用已有的元素,不会重新去渲染
+  // 这样做可以让vue变的很快,当也有问题
+  // 比如上面例子中input中已经输入的值就并不会改变
+  // vue中可以添加key不同的key值来避免复用元素
+
+  // v-show用法和v-if差不多,但是v-show不会删减dom元素,只是改变元素display属性
+  // v-show不支持template,不能和v-else一起使用
+
+ </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <ul>
+  <li v-for='(value,name,index) in object' v-bind:key='index'>
+   {{name}}:{{value}}:{{index}}
+  </li>
+ </ul>
+ <script src="../../vue.js"></script>
+ <script>
+  const vm=new Vue({
+   el:'ul',
+   data:{
+    parentMessage:'Parent',
+    object:{
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
+    }
+   }
+  })
+  // 当更新列表时,vue采取就近更新的策略,不会移动DOM元素
+
+  // 但是为了跟踪每个li节点的身份,需要添加具有唯一属性值的key属性
+  // 建议用v-for的时候提供key属性,因为key是vue识别节点的机制
+ </script>
+</body>
+</html>

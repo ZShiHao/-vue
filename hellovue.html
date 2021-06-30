@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">{{message}}</div>
+ <script src="./vue.js"></script>
+ <script>
+
+  // 编程范式:声明式编程
+  // 只需要改变数据,不需要操作元素,元素内部的数据自动改变,响应式
+  // 数据和DOM之间相互链接
+  const app=new Vue({
+   el:'#app', // 挂载要管理的元素
+   data:{ // 定义元素内部需要替换的数据
+    message:'hello'
+   }
+  })
+
+  // 原生的实现方式,(编程范式:命令式编程)
+  // 每一步都指示要做什么
+  // 1.获取元素
+  //const box=document.querySelector('#app');
+  // 2.定义要写入的数据
+ // let m='hello';
+  // 3.操作元素向内部写入文本
+  //box.innerHTML=m;
+  // 4.数据发生变动
+ // m='你好';
+  // 5.重新操作元素
+  //box.innerHTML=m;
+ </script>
+</body>
+</html>

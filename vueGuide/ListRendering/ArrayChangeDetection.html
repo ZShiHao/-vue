@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <ul>
+  <li v-for="item in items">
+   {{item}}
+  </li>
+ </ul>
+ <script src="../../vue.js"></script>
+ <script>
+  const vm=new Vue({
+   el:'ul',
+   data:{
+    items:[1,3,4,9,3,2,0]
+   }
+  })
+  // 数组的变更方法,数组调用这些方法时,会导致原数组发生改变
+  // 数组发生改变,会触发视图的更新
+  // push\pop\shift\unshift\splice\sort\reverse
+ </script>
+</body>
+</html>

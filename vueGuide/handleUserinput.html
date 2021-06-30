@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <p>{{message}}</p>
+  <button v-on:click='reverseMessage'>Reverse message</button>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // v-on指令可以给DOM元素添加事件监听,从而去触发vue实例中的方法
+  // 通过这种方式实现更新app的状态,并没有去操作DOM,所有的DOM操作都由vue去实现
+  // 自己写的代码更专注与底层逻辑,业务逻辑上
+  const app=new Vue({
+   el:'#app',
+   data:{
+    message:"hello vue.js"
+   },
+   methods:{
+    reverseMessage:function(){
+     this.message=this.message.split('').reverse().join('')
+    }
+   }
+  })
+ </script>
+</body>
+</html>
