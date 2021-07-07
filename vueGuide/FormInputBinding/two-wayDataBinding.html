@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <!-- <input type="text" placeholder="输入" v-bind:value="message" v-on:input="message=$event.target.value"> -->
+  <!-- v-model语法糖,替换v-bind和v-on:input -->
+  <input type="text" placeholder="输入" v-model='message'>
+  <h2>{{message}}</h2>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // v-model是语法糖
+  // v-model双向绑定,通过其他指令实现v-model的双向绑定
+  // 变量和属性双向绑定的原理:
+  // 1.通过v-bind命令将input的value值与message变量绑定
+  // message数据发生改变,input值也发生改变
+  // 2.通过input事件监听,将message变量与input的value值绑定
+  // input事件被触发时,将value的值赋值给message变量(value和message值保持一致,不会导致重绘)
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    message:''
+   },
+   // methods:{
+   //  update:function(event){
+   //    this.message=event.target.value;
+   //  }
+   // }
+  })
+ </script>
+</body>
+</html>

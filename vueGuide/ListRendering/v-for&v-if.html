@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id='app'>
+  <ul v-if='numbers.length'>
+   <li v-for='n in numbers'>{{n}}</li>
+  </ul>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // v-for的优先级比v-if高
+  // 先执行v-for语句,然后每次迭代创建li之后,再对每个li执行v-if
+  // 如果想暂时先跳过循环,可以在最外面套用v-if
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    numbers:[0,1,2,3,4,5]
+   }
+  })
+ </script>
+</body>
+</html>

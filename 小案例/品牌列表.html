@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+     <!-- 导入 bootstrap 的样式表 -->
+    <!-- https://v4.bootcss.com/docs/components/forms/#switches -->
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <style>
+      :root {
+        font-size: 13px;
+      }
+
+      body {
+        padding: 8px;
+      }
+      label {
+       /* 禁止文本被选中 */
+       user-select: none;
+      }
+    </style>
+</head>
+<body>
+ <div id="app">
+  <!-- 卡片区域 -->
+  <div class="card">
+    <h5 class="card-header">添加品牌</h5>
+    <div class="card-body">
+      <!-- 添加品牌的表单 -->
+      <form class="form-inline" @submit="addNewBrand($event)">
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">品牌名称</div>
+          </div>
+          <!-- 文本输入框 -->
+          <input type="text" class="form-control" v-model="brandName"/>
+        </div>
+
+        <!-- 提交表单的按钮 -->
+        <button type="submit" class="btn btn-primary mb-2">添加品牌</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 品牌列表 -->
+  <table class="table table-bordered table-striped mt-2">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>品牌名称</th>
+        <th>状态</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <!-- 表格的主体区域 -->
+    <tbody>
+      <!-- TODO：循环渲染表格的每一行数据 -->
+      <tr is="brand-item" v-for='(brand,index) in brandlist' :brand="brand" :index=index></tr>
+     <!-- <brand-item v-for='(brand,index) in brandlist' v-bind:brand="brand" v-bind:index=index></brand-item> -->
+    </tbody>
+  </table>
+</div>
+<script src="../vue.js"></script>
+<script>
+ Vue.component('brand-item',{
+  props:['brand','index'],
+  template:`
+  <tr>
+   <td>{{brand.id}}</td>
+       <td>{{brand.brandname}}</td>
+       <td>
+        <div class="custom-control custom-switch">
+         <input type="checkbox" class="custom-control-input" :id="brand.id" v-model='brand.state'/>
+         <label class="custom-control-label" :for="brand.id" v-if='brand.state'>已启用</label>
+         <label class="custom-control-label" :for="brand.id" v-else>已禁用</label>
+        </div>
+       </td>
+       <td>{{brand.addtime}}</td>
+       <td>
+         <a href="javascript:;" v-on:click="brand.id=333" >删除</a>
+       </td>
+  </tr>
+  `
+ })
+ const vm=new Vue({
+  el:'#app',
+  data:{
+   brandlist:[
+   { id: 1, brandname: '宝马', state: true, addtime: new Date() },
+   { id: 2, brandname: '奥迪', state: false, addtime: new Date() },
+   { id: 3, brandname: '奔驰', state: true, addtime: new Date() },
+   ],
+   brandName:''
+  },
+  methods:{
+   deleteBran:function(index){
+    this.brandlist.splice(index,1);
+   },
+   addNewBrand:function(event){
+    event.preventDefault();
+    const obj={
+     id:this.brandlist.length!=0?this.brandlist[this.brandlist.length-1].id+1:1,
+     brandname:this.brandName,
+     state:false,
+     addtime:new Date()
+    }
+    this.brandlist.push(obj);
+   }
+  }
+ })
+</script>
+</body>
+</html>

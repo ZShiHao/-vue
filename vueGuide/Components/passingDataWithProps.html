@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <!-- <blog-post v-for='post in posts' v-bind:key='post.id' v-bind:title='post.title' v-bind:content='post.content'></blog-post> -->
+  <!-- 当需要传输的数据比较多时,每个数据都注册一个自定义属性太繁琐,可以只注册一个对象自定属性 -->
+  <blog-post v-for='post in posts' v-bind:post='post'></blog-post>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 父组件可以通过子组件的props向子组件传数据
+
+  // props是一些在组件上注册的自定义属性(attributes)
+  // 当向标签的自定义属性赋值时,就会成为组件实例的一个属性(property)
+  // 所以在组件模版中可以访问这个属性的值,就想访问data中的数据一样
+  Vue.component('blog-post',{
+   // props:['title','content'],
+   props:['post'],
+   template:`
+   <div>
+   <h3>{{post.title}}</h3>
+   <div v-html="post.content"></div>
+   </div>
+   `
+  })
+
+  // 通过props可以让父组件向子组件传递数据   
+  // 1.在根vue实例中定义数据
+  // 2.在子组件中定义自定义属性
+  // 3.通过v-bind将自定义属性与父组件中对应的数据绑定
+  //   子组件的自定义属性可以拿到父组件中的具体数据(父组件将数据挂载为root vue实例的一个属性)
+  // 4.当自定义属性拿到数据后,会将自定义属性挂载到子组件实例上
+  // 5.组件实例下的html标签可以通过mustache语法拿到组件实例上挂载的属性值
+  const vm =new Vue({
+   el:'#app',
+   data:{
+    posts:[
+     { id: 1, title: 'My journey with Vue',content:'vue is awesome!' },
+     { id: 2, title: 'Blogging with Vue', content:'vue is awesome too!' },
+     { id: 3, title: 'Why Vue is so fun',content:'vue is awesome too too!' }
+    ]
+   }
+  })
+ </script>
+</body>
+</html>

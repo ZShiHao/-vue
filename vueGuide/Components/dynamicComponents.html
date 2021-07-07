@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <style>
+     .tab-button {
+        padding: 6px 10px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background: #f0f0f0;
+        margin-bottom: -1px;
+        margin-right: -1px;
+      }
+      .tab-button:hover {
+        background: #e0e0e0;
+      }
+      .tab-button.active {
+        background: #e0e0e0;
+      }
+      .tab {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+ </style>
+</head>
+<body>
+ <div id="app">
+  <button class="tab-button" v-for="(tab,index) in tabs" @click='currentTab=index' :class='{active:currentTab==index}'>{{tab}}</button>
+  <component v-bind:is="currentTabComponent" class="tab"></component>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 动态切换多个组件
+  // 通过vue提供的component标签元素和is属性
+  // currentTabComponent可以使组件的名字.也可以是组件的options对象
+  Vue.component('home',{
+   template:`
+   <div>Home component</div>
+   `
+  })
+  Vue.component('posts',{
+   template:`
+   <div>Posts component</div>
+   `
+  })
+  Vue.component('archive',{
+   template:`
+   <div>Archive component</div>
+   `
+  })
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    currentTab:0,
+    tabs:["Home",'Posts','Archive']
+   },
+   computed:{
+    currentTabComponent:function(){
+     return this.tabs[this.currentTab].toLowerCase()
+    }
+   }
+  })
+ </script>
+</body>
+</html>

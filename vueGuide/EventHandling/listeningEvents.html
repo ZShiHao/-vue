@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="ex1">
+  <button v-on:click="counter+=1">Add 1</button>
+  <p>The button above has been clicked {{counter}} times.</p>
+ </div>
+ <div id='ex2'>
+  <button v-on:click="greet('ge')">Greet</button>
+ </div>
+ <div id="ex3">
+  <!-- <form action=""> -->
+   <button type="submit" v-on:click.prevent.once="warn('Form cannot be submitted yet.',$event)">submit</button>
+   <input type="text" v-on:keyup.enter.s="tips($event)">
+  <!-- </form> -->
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // v-on执行用来监听dom事件,如果触发事件就执行后面的js代码
+  const vm=new Vue({
+   el:'#ex1',
+   data:{
+    counter:0
+   }
+  })
+  // 如果代码逻辑复杂,可以将其写到methods属性中,然后提供方法名,触发事件时可以调用方法
+  // 直接与方法名相绑定
+  // 除了直接绑定方法名之外,还可以直接提供一个js方法调用,这样的话可以向方法中传入参数啦
+  const vm2=new Vue({
+   el:'#ex2',
+   data:{
+    name:'zhangshihao'
+   },
+   methods:{
+    greet:function(who){
+     alert('Hello '+this.name+' from '+who+'!')
+    }
+   }
+  })
+
+  // 传入$event参数,可以在事件处理函数中访问原生的dom事件对象
+  const vm3=new Vue({
+   el:'#ex3',
+   methods:{
+    warn:function(message,event){
+     if(event){
+      console.log(event);
+      // event.preventDefault();
+     }
+     alert(message);
+    },
+    tips:function(event){
+     console.log(event);
+     console.log('hello,vue');
+    }
+   }
+  })
+
+  // 事件修饰符
+  // 不在方法内部使用event.preventDefault()或者event.stopPropagation()
+  // vue为v-on命令提供了修饰符,直接在事件后面添加事件修饰符就可以了
+  // 修饰符的顺序也很重要
+  // v-on:click.stop.prevent=""
+
+  // 按键修饰符,直接在事件后面添加有效的按键修饰符
+  // v-on:keyup.enter="" 只有当按了enter键的时候才触发
+ </script>
+</body>
+</html>

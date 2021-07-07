@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <template v-if="show">
+   <label for="username">用户账号</label>
+   <input type="text" key='1' id="username" placeholder="请输入用户名">
+  </template>
+  <template v-else>
+   <label for="email">用户账号</label>
+   <input type="text" key='2' id="email" placeholder="请输入邮箱">
+  </template>
+  <button v-on:click='toggle'>切换账号类型</button>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    show:true
+   },
+   methods:{
+    toggle:function(){
+     this.show=!this.show
+    }
+   }
+  })
+ </script>
+</body>
+</html>

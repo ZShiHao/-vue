@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <input type="text" :value="message">
+  <div>{{message}}</div>
+  <button @click="message='Vue'">改变变量</button>
+ </div>
+ <div id="component">
+  <post-list v-for='post in posts' :post="post" :check='check'></post-list>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // v-bind将属性和变量绑定
+  // 属性发生改变,不会导致变量同步改变
+  // 只有当变量发生改变时,才会导致属性值与变量值进行同步
+  // tips:不推荐直接改变绑定过的属性值,因为如果改变之后,变量发生改变会重新渲染并覆盖属性值
+  // tips:
+  const vm =new Vue({
+   el:'#app',
+   data:{
+    message:'hello'
+   }
+  })
+
+  // 
+
+  Vue.component('post-list',{
+   props:['post','check'],
+   template:`
+   <button @click="check=!check">取反</button>
+   `
+  })
+
+  const vm2=new Vue({
+   el:'#component',
+   data:{
+    check:true,
+    posts:[
+     {id:1,title:'hello',ok:true},
+     {id:2,title:'vue',ok:true}
+    ]
+   }
+  })
+ </script>
+</body>
+</html>

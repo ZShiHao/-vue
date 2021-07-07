@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id='app'>
+  <!-- 可以直接跟一个整数,表示重复多少次 -->
+  <!-- <span v-for='n in 10'>
+   {{n}}
+  </span> -->
+  <!-- 也可以在template上使用v-for -->
+  <ul>
+   <template v-for='n in 10'>
+    <li>{{n}}</li>
+    <li>{{n}}</li>
+   </template>
+  </ul>
+
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  const vm=new Vue({
+   el:'#app',
+   data:{
+   }
+  })
+ </script>
+</body>
+</html>

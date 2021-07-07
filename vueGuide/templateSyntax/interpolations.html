@@ -9,6 +9,9 @@
 <body>
  <div id="app" v-bind:style="{color:color}">
   {{ok?message:'no'}}
+
+  <!-- 证明v-bind是单向数据绑定 -->
+  <div v-bind:id='id' @click="change">{{id}}</div>
  </div>
  <script src="../../vue.js"></script>
  <script>
@@ -23,7 +26,13 @@
    data:{
     ok:true,
     message:'<h1>hello,vue</h1>',
-    color:'red'
+    color:'red',
+    id:'zhang'
+   },
+   methods:{
+    change:function(){
+     document.querySelector('#zhang').id='shi'
+    }
    }
   })
  </script>

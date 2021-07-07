@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <!-- <custom-input v-bind:value='searchText' v-on:input="searchText=$event"></custom-input> -->
+  <!-- 通过v-model语法糖可以直接实现组件的双向绑定 -->
+  <custom-input v-model='searchText'></custom-input>
+  <div>Your search text is {{searchText}}</div>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 实现子组件中input的双向绑定
+
+  // 1.data中变量的值同步更新到子组件的input中的value属性(父组件向子组件传递数据)
+  //  1.1 子组件设置自定义属性value
+  //  1.2 将自定义组件的value属性与父组件中的变量绑定(v-bind:value="")
+  //  1.3 将子组件中的input标签的value属性与自定义组件中的value属性绑定
+  // 2.子组件中input的value属性同步更新到data中的变量(监听子组件的事件,子组件向父组件传递数据)
+  //  2.2 子组件中input表单触发input事件后,调用$emit()发出自定义事件(事件必须是input),将数据作为参数传入其中
+  //  2.3 子组件监听自定义事件,通过$event参数可以获取到数据,然后通过事件处理函数将数据赋值给data属性
+
+  Vue.component('custom-input',{
+   props:['value'],
+   // methods:{
+   //  // 应该尽量避免直接修改属性
+   //  // update:function(event){
+   //  //  this.value=event.target.value;
+   //  // }
+   // },
+   methods:{
+    change:function(event){
+     this.value=event.target.value;
+    }
+   },
+   // 如果组件要使用v-model指令,input自定义事件的事件名必须是input
+   template:`
+    <input type='text' v-bind:value="value" v-on:input="change($event)">
+   `
+  })
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    searchText:'vue '
+   }
+  })
+ </script>
+</body>
+</html>

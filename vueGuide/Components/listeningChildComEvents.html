@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <div v-bind:style="{fontSize:postFontSize+'em'}" >
+  <blog-post v-for="post in posts" :key="post.id" :post='post' v-on:enlarge-text='postFontSize+=$event'></blog-post>
+  </div>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 子组件可以使用$emit方法触发父亲的自定义事件
+
+  // vue实例内置方法$emit方法可以发出一个事件,参数一是事件的名称,参数二是一个数值,可以通过$event获取到
+  Vue.component('blog-post',{
+   props:['post'],
+   template:`
+    <div>
+     <h3>{{post.title}}</h3>
+     <button v-on:click="$emit('enlarge-text',0.3)">
+      Enlage text
+     </button>
+     <div v-html="post.content"></div>
+    </div>
+   `
+  })
+
+  const vm=new Vue({
+   el:'#app',
+   data:{
+    postFontSize:1, // post内容的字体大小
+    posts:[
+     { id: 1, title: 'My journey with Vue',content:'vue is awesome!' },
+     { id: 2, title: 'Blogging with Vue', content:'vue is awesome too!' },
+     { id: 3, title: 'Why Vue is so fun',content:'vue is awesome too too!' }
+    ]
+   }
+  })
+ </script>
+</body>
+</html>

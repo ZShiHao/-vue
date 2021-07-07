@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="ex1">
+  <input type="text" v-model="message">
+  <div style="white-space: pre-line;">{{message}}</div>
+  <textarea v-model='message'></textarea>
+  <br>
+ </div>
+ <!-- 复选框 -->
+ <div id="checkbox">
+  <!-- 当个复选框 -->
+  <input type="checkbox" v-model='checked' >
+  <span>Only one checkbox : {{checked}}</span>
+  <br>
+  <!-- 多个复选框 -->
+  <input type="checkbox" value="jack" v-model='checkName'>
+  <input type="checkbox" value="john" v-model='checkName'>
+  <input type="checkbox" value="mike" v-model='checkName'>
+  <span>Checked names : {{checkName}}</span>
+ </div>
+ <!-- 单选框 -->
+ <div id="radio">
+  <input name="radio" type="radio" value="one" v-model='picked'>
+  <input name="radio" type="radio" value="two" v-model='picked'>
+  <span>Your selection is : {{picked}}</span>
+ </div>
+ <!-- 选择框 -->
+ <div id="select">
+  <select v-model='selected'>
+   <option value="">Default select</option>
+   <option>A</option>
+   <option>B</option>
+   <option>C</option>
+  </select>
+  <span>Your selection is {{selected}}</span>
+  <br>
+  <select name="" id="" v-model='mul' multiple>
+   <option value="">Default select</option>
+   <option>A</option>
+   <option>B</option>
+   <option>C</option>
+  </select>
+  <span>Your selection is {{mul}}</span>
+  <br>
+  <!-- 动态渲染选项 -->
+  <select name="" id="" v-model='sel'>
+   <option v-for="option in options" v-bind:value='option.value'>{{option.text}}</option>
+  </select>
+  <span>Your selection is {{sel}}</span>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // v-model指令可以创建双向绑定在表单\文本域\下拉菜单上
+  // 会自动更新依赖于表单数据的元素
+  // text和文本域使用的是input中的value属性和input事件
+  // checkbox和radio默认使用的是checked的属性和change事件
+  const vm=new Vue({
+   el:'#ex1',
+   data:{
+    message:'',
+    name:'',
+   },
+  })
+
+  // 复选框
+  // 单个复选框,v-model将数据与input中的checked属性双向绑定
+  // 复选框的checked属性改变,会更新model中绑定的数据
+
+  // 多个复选框,可以将checked属性绑定到同一个数组上,数组中的数据来自于input的value值
+  // checked属性发生改变,数组会同步更新,会把input表单上的value属性更新到数组中
+  const checkbox=new Vue({
+   el:'#checkbox',
+   data:{
+    checked:'',
+    checkName:[]
+   }
+  })
+
+  // 单选框
+  // 单选框,将数据与checked属性绑定,checked改变,数据发生改变,但是数据来自于value值
+  const radio=new Vue({
+   el:'#radio',
+   data:{
+    picked:''
+   }
+  })
+
+  // 下拉选项框
+  // 将数据与value属性绑定,value发生改变,数据也保持
+  const select=new Vue({
+   el:'#select',
+   data:{
+    selected:'',
+    mul:[],
+    options:[
+     {text:'One',value:'A'},
+     {text:'Two',value:'B'},
+     {text:'Three',value:'C'},
+    ],
+    sel:''
+   }
+  })
+ </script>
+</body>
+</html>

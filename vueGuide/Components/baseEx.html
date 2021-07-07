@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <button-counter title="zhang"></button-counter>
+  <button-counter></button-counter>
+  <button-counter></button-counter>
+  <button-counter></button-counter>
+  <button-counter></button-counter>
+ </div>
+ <script src="../../vue.js"></script>
+ <script>
+  // 组件:vue组件是一个可以复用的拥有名字的vue实例
+  // 可以将组件作为一个自定义的标签使用,可以插入到跟vue实例中
+  
+  // 定义一个全局组件,名字叫 button-counter
+  // 全局组件可以用于所有的根vue实例中
+  Vue.component('button-counter',{
+   data:function(){
+    // 与root vue实例不同的是,data必须是一个函数
+    // 这样可以让每个组件都维护一份自己的data数据
+    return {
+     count:0
+    }
+   },
+   // 组件模版必须有一个根元素标签,包裹着其他元素标签,不能直接写其他的元素标签
+   template:`
+   <div>
+   <h2>Button click</h2>
+   <button v-on:click="count++">You clicked me {{count}} times.</button>
+   </div>
+   `
+  })
+  const vm=new Vue({
+   el:'#app',
+
+  })
+ </script>
+</body>
+</html>
