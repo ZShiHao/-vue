@@ -8,9 +8,9 @@
 </head>
 <body>
  <div id="app">
-  <input type="text" :value="message">
+  <input type="text" :value="message" :cutom='custom'>
   <div>{{message}}</div>
-  <button @click="message='Vue'">改变变量</button>
+  <button @click="custom.ok=!custom.ok">改变变量</button>
  </div>
  <div id="component">
   <post-list v-for='post in posts' :post="post" :check='check'></post-list>
@@ -25,19 +25,22 @@
   const vm =new Vue({
    el:'#app',
    data:{
+    custom:{
+     ok:true
+    },
     message:'hello'
    }
   })
 
-  // 
-
+  // 如果改变自定义组件的属性,同样不会改变vue实例的属性
+  // tips:自定义组件的属性,同样不推荐直接改变属性值,会报错,但是如果变量是对象的话是例外
+  // tips:如果自定义属性绑定的变量是一个对象,那么改变属性的对象值,会导致vue实例上的变量同样被改变
   Vue.component('post-list',{
    props:['post','check'],
    template:`
-   <button @click="check=!check">取反</button>
+   <button @click="post.title='hhhhhhh'">取反</button>
    `
   })
-
   const vm2=new Vue({
    el:'#component',
    data:{

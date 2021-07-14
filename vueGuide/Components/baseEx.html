@@ -21,6 +21,7 @@
   
   // 定义一个全局组件,名字叫 button-counter
   // 全局组件可以用于所有的根vue实例中
+  // tips:这是一个语法糖的写法
   Vue.component('button-counter',{
    data:function(){
     // 与root vue实例不同的是,data必须是一个函数
@@ -37,6 +38,18 @@
    </div>
    `
   })
+
+  // 组件注册的本质过程
+  const cpn=Vue.extend({
+   template:`
+   <div>
+   <h2>Button click</h2>
+   <button v-on:click="count++">You clicked me {{count}} times.</button>
+   </div>
+   `
+  })
+  Vue.component('button-counter',cpn)
+
   const vm=new Vue({
    el:'#app',
 

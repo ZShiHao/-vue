@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <component-a></component-a>
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+
+  // 组件局部注册
+  let ComponentB={
+   template:`
+   <div>
+    <h2>ComponentB</h2>
+    <p>我是子组件B</p>
+   </div>
+   `
+  }
+  let ComponentA={
+   template:`
+   <div>
+    <h2>ComponentA</h2>
+    <p>我是父组件A</p>
+    <component-b></component-b>
+   </div>
+   `,
+   components:{
+    'component-b':ComponentB
+   }
+  }
+
+  const app=new Vue({
+   el:'#app',
+   components:{
+    'component-a':ComponentA
+   }
+  })
+ </script>
+</body>
+</html>
