@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="1">
+  <!-- 通过v-bind可以告诉vue这是一个JS表达式,不是一个字符串 -->
+  <blog-post title='zhang' v-bind:likes='42' v-bind:author="{name:'zhang'}"></blog-post>
+ </div>
+ <div id="2">
+
+ </div>
+ <script src="../vue.js"></script>
+ <script>
+  // prop命名
+  // html标签的属性,对大小写不敏感,会把大写字符转换为小写,所以驼峰命名法,在标签中要用-来代替
+
+  // 1.prop类型
+  // 给组件的每一个属性指定特定的类型值
+  // 通过对象的形式定义组件的属性
+  // tips:直接给组件的属性赋值的话,默认值为String类型
+  // tips:所以如果要给组件属性赋其他类型的值的话,就要用v-bind
+  let ComponentA={
+   props:{
+    title:String,
+    likes:Number,
+    author:Object
+   },
+   template:`
+   <div>
+    <h3>{{title}}</h3>
+    <div>likes:{{likes}}</div>
+   </div>
+   `
+  }
+  const vm1=new Vue({
+   el:"#1",
+   components:{
+    "blog-post":ComponentA
+   }
+  })
+
+  // 2.单向数据流
+
+  const vm2=new Vue({
+   el:"#2",
+
+  })
+ </script>
+</body>
+</html>

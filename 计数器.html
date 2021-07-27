@@ -12,6 +12,20 @@
   <button @click="add">+</button>
   <button @click="sub">-</button>
  </div>
+ <div id="cpn">
+  <cpn-counter></cpn-counter>
+  <cpn-counter></cpn-counter>
+  <cpn-counter></cpn-counter>
+  <cpn-counter ref='aaa'></cpn-counter>
+
+ </div>
+ <template id="tem">
+  <div>
+   <h2>当前计数为: {{count}}</h2>
+   <button @click="add">+</button>
+   <button @click="sub">-</button>
+  </div>
+ </template>
  <script src="./vue.js"></script>
  <script>
   const app=new Vue({
@@ -27,6 +41,32 @@
      this.counter--;
     }
    }
+  })
+
+
+  // 将计数器封装为一个组件使用
+  let obj={count:0}
+  let componentA={
+   data:function(){
+    return {
+     count:0
+    }
+   },
+   template:'#tem',
+   methods:{
+    add:function(){
+     this.count++
+    },
+    sub:function(){
+     this.count--
+    }
+   }
+  }
+  const vm=new Vue({
+   el:"#cpn",
+   components:{
+    'cpn-counter':componentA
+   },
   })
  </script>
 </body>

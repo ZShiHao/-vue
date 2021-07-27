@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="app">
+  <component-a></component-a>
+ </div>
+ <!-- 1.通过x-template定义模版 -->
+ <script type="text/x-template" id="cpnA">
+  <div>
+   <h3>模版的定义1</h3>
+  </div>
+ </script>
+ <script src="../vue.js"></script>
+ <!-- 2.通过template标签定义模版 -->
+ <template id="cpn2">
+  <div>
+   <h3>模版定义2</h3>
+  </div>
+ </template>
+ <script>
+  let componentA={
+   template:'#cpn2'
+  }
+  const vm=new Vue({
+   el:'#app',
+   components:{
+    'component-a':componentA
+   }
+  })
+ </script>
+</body>
+</html>

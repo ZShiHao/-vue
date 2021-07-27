@@ -25,6 +25,11 @@
   Vue.component('button-counter',{
    data:function(){
     // 与root vue实例不同的是,data必须是一个函数
+    // root Vue实例只实例化一次,所以data可以是一个对象
+
+    // 组件会被多次实例化,所以组件中的data不能是一个对象,否则每个实例中的data会指向同一个对象
+    // data是一个函数,返回一个对象
+    // 组件实例化的时候,每个组件都会执行这个函数,返回一个不同的对象
     // 这样可以让每个组件都维护一份自己的data数据
     return {
      count:0

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <div id="content">
+  <!-- 1.插槽内容 -->
+  <navigation-link url="/profile">
+   Your profile
+  </navigation-link>
+  <navigation-link></navigation-link>
+  <!-- 2.具名插槽 -->
+  <base-layout>
+   <template v-slot:header>
+    <h1>title</h1>
+   </template>
+   <template v-slot:footer>
+    <p>footer</p>
+   </template>
+   content
+  </base-layout>
+  <!-- 3.作用域插槽 -->
+  <current-user>
+   <template v-slot:default="slotProps">
+    {{slotProps.user.firstName}}
+   </template>
+  </current-user>
+  <current-user></current-user>
+ </div>
+ <template id="link">
+  <div>
+   <a :href="url">
+    <slot>!!!!!!!</slot>
+   </a>
+  </div>
+ </template>
+ <template id="layout">
+  <div>
+   <header>
+    <slot name="header"></slot>
+   </header>
+   <main>
+    <slot></slot>
+   </main>
+   <footer>
+    <slot name="footer"></slot>
+   </footer>
+  </div>
+ </template>
+ <template id="user">
+  <span>
+   <slot v-bind:user='user'>
+    {{user.lastName}}
+   </slot>
+  </span>
+ </template>
+ <script src="../vue.js"></script>
+ <script>
+  // 1.插槽内容
+  const vm=new Vue({
+   el:"#content",
+   data:{
+   },
+   components:{
+    'navigation-link':{
+     template:"#link",
+     props:{
+      url:String
+     }
+    },
+    'base-layout':{
+     template:"#layout",
+    },
+    // 3.作用域插槽
+    // 让插槽的内容访问子组件中的数据
+    'current-user':{
+     data:function(){
+      return {
+       user:{
+        firstName:'Zhang',
+        lastName:'ShiHao'
+       }
+      }
+     },
+     template:"#user"
+    }
+   }
+  })
+  // 2.具名插槽
+ </script>
+</body>
+</html>
